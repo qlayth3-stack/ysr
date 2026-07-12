@@ -1,0 +1,900 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>البازار الألماني</title>
+    <link rel="manifest" href="../manifest.json" />
+    <meta name="theme-color" content="#378b8e" />
+    <link rel="stylesheet" href="style.css?v=3" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div
+      id="update-bar"
+      style="
+        display: none;
+        position: fixed;
+        bottom: 80px;
+        left: 20px;
+        right: 20px;
+        background: var(--primary);
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        z-index: 10001;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      "
+    >
+      <span style="font-weight: bold; font-size: 0.95rem"
+        >يتوفر تحديث جديد للتطبيق!</span
+      >
+      <button
+        id="btn-update-now"
+        style="
+          background: white;
+          color: var(--primary);
+          border: none;
+          padding: 0.5rem 1rem;
+          border-radius: 4px;
+          font-weight: bold;
+          cursor: pointer;
+          font-family: &quot;Tajawal&quot;, sans-serif;
+        "
+      >
+        تحديث الآن
+      </button>
+    </div>
+
+    <div
+      class="modal-overlay"
+      id="login-modal"
+      style="
+        display: none;
+        z-index: 10000;
+        background: var(--bg-color);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div
+        style="
+          width: 100%;
+          max-width: 400px;
+          padding: 2rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        "
+      >
+        <h1
+          style="
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 900;
+          "
+        >
+          البازار الألماني
+        </h1>
+        <p
+          style="
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            text-align: center;
+          "
+        >
+          قم بتسجيل الدخول للاستمرار
+        </p>
+        <form
+          id="login-form"
+          style="width: 100%; display: flex; flex-direction: column; gap: 1rem"
+        >
+          <input
+            type="text"
+            id="login-name"
+            class="input-field"
+            style="width: 100%"
+            placeholder="الاسم الكريم"
+            required
+          />
+          <input
+            type="text"
+            id="login-address"
+            class="input-field"
+            style="width: 100%"
+            placeholder="العنوان الكامل"
+            required
+          />
+          <input
+            type="tel"
+            id="login-phone"
+            class="input-field"
+            style="width: 100%; text-align: right"
+            placeholder="رقم الهاتف"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            required
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+          />
+          <button
+            type="submit"
+            class="primary-btn"
+            style="margin-top: 1rem; width: 100%"
+          >
+            دخول
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="app-container">
+      <header class="top-bar">
+        <button id="theme-toggle" class="theme-btn" aria-label="تبديل المظهر">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            class="moon-icon"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            class="sun-icon"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="display: none"
+          >
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+
+        <div class="logo">
+          <div class="logo-text">
+            <h1>البازار الألماني</h1>
+          </div>
+        </div>
+
+        <div class="logo-image-container">
+          <img
+            src="https://ikiuh.b-cdn.net/%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D8%A8%D8%AF%D9%88%D9%86%20%D8%B9%D9%86%D9%88%D8%A7%D9%86.png"
+            alt="البازار الألماني"
+            class="logo-image"
+          />
+        </div>
+      </header>
+
+      <div class="search-cart-row">
+        <div class="search-box">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#9ca3af"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="بحث عن مثبقالك..."
+          />
+        </div>
+        <button class="top-cart-btn" id="top-cart-btn">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#ffffff"
+            stroke-width="2"
+          >
+            <circle cx="9" cy="21" r="1.5"></circle>
+            <circle cx="20" cy="21" r="1.5"></circle>
+            <path
+              d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+            ></path>
+          </svg>
+          <span class="nav-badge" id="top-cart-badge">2</span>
+        </button>
+      </div>
+
+      <div class="banner-slider" id="banner-slider">
+        <div class="banner-track" id="banner-track">
+          <div class="banner">
+            <div
+              class="banner-image-container"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80&quot;);
+              "
+            ></div>
+          </div>
+          <div class="banner" style="background: #1e3a8a">
+            <div
+              class="banner-image-container"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=800&q=80&quot;);
+              "
+            ></div>
+          </div>
+          <div class="banner" style="background: #9d174d">
+            <div
+              class="banner-image-container"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1596462502278-27bf85033e5a?auto=format&fit=crop&w=800&q=80&quot;);
+              "
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination-dots" id="banner-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+
+      <div class="categories-wrapper">
+        <div class="categories" id="categories-list">
+          </div>
+      </div>
+
+      <div class="products-grid" id="products-list">
+        </div>
+
+      <div class="modal-overlay" id="product-details-modal">
+        <div class="product-details-content">
+          <button class="close-modal-btn" id="close-product-details-btn">
+            &times;
+          </button>
+          <div id="product-details-body"></div>
+        </div>
+      </div>
+
+      <div
+        class="account-view"
+        id="account-view"
+        style="display: none; padding: 1.5rem"
+      >
+        <div
+          class="account-header"
+          style="text-align: center; margin-bottom: 2rem"
+        >
+          <div
+            class="account-avatar"
+            style="
+              width: 80px;
+              height: 80px;
+              background: var(--primary);
+              color: white;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 2rem;
+              margin: 0 auto 1rem;
+            "
+          >
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <h2 style="color: var(--text-main); margin-bottom: 0.5rem">حسابي</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem">
+            مرحباً بك في البازار الألماني
+          </p>
+        </div>
+
+        <div
+          class="account-menu"
+          style="
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+          "
+        >
+          <a
+            href="#"
+            class="account-menu-item"
+            id="btn-saved-addresses"
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding: 1rem 1.5rem;
+              border-bottom: 1px solid var(--border);
+              text-decoration: none;
+              color: var(--text-main);
+            "
+          >
+            <div style="display: flex; align-items: center; gap: 1rem">
+              <span style="color: var(--primary)"
+                ><svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                  ></path>
+                  <circle cx="12" cy="10" r="3"></circle></svg
+              ></span>
+              <span style="font-weight: 500">العناوين المحفوظة</span>
+            </div>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#9ca3af"
+              stroke-width="2"
+            >
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </a>
+          <a
+            href="https://wa.me/9647730082224"
+            target="_blank"
+            class="account-menu-item"
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding: 1rem 1.5rem;
+              border-bottom: 1px solid var(--border);
+              text-decoration: none;
+              color: var(--text-main);
+            "
+          >
+            <div style="display: flex; align-items: center; gap: 1rem">
+              <span style="color: #25d366"
+                ><svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  ></path></svg
+              ></span>
+              <span style="font-weight: 500">خدمة العملاء (واتساب)</span>
+            </div>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#9ca3af"
+              stroke-width="2"
+            >
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </a>
+          <a
+            href="#"
+            class="account-menu-item"
+            id="btn-account-settings"
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding: 1rem 1.5rem;
+              text-decoration: none;
+              color: var(--text-main);
+            "
+          >
+            <div style="display: flex; align-items: center; gap: 1rem">
+              <span style="color: var(--primary)"
+                ><svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                  ></path></svg
+              ></span>
+              <span style="font-weight: 500">الإعدادات</span>
+            </div>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#9ca3af"
+              stroke-width="2"
+            >
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </a>
+        </div>
+
+        <button
+          id="btn-logout"
+          style="
+            width: 100%;
+            margin-top: 2rem;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ef4444;
+            background: transparent;
+            color: #ef4444;
+            font-weight: bold;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+          "
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          تسجيل الخروج
+        </button>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="#" class="nav-item" id="nav-account">
+        <div class="icon-wrapper">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </div>
+        <span>حساب</span>
+      </a>
+      <a href="#" class="nav-item" id="nav-favorites">
+        <div class="icon-wrapper">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+            ></path>
+          </svg>
+        </div>
+        <span>المفضلة</span>
+      </a>
+      <a href="#" class="nav-item cart-nav">
+        <div class="icon-wrapper">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="9" cy="21" r="1.5"></circle>
+            <circle cx="20" cy="21" r="1.5"></circle>
+            <path
+              d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+            ></path>
+          </svg>
+          <span class="nav-badge" id="nav-cart-badge">2</span>
+        </div>
+        <span>السلة</span>
+      </a>
+      <a href="#" class="nav-item active" id="nav-home">
+        <div class="icon-wrapper">
+          <svg
+            class="home-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+        </div>
+        <span>الرئيسية</span>
+      </a>
+    </nav>
+
+    <div class="modal-overlay" id="cart-modal">
+      <div class="cart-modal-content">
+        <div class="cart-header">
+          <h2>سلة المشتريات</h2>
+          <button class="close-modal-btn" id="close-cart-btn">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="cart-items-container" id="cart-items-container">
+          </div>
+
+        <div class="cart-summary">
+          <div class="summary-line">
+            <span>المجموع:</span>
+            <span id="cart-subtotal">0 د.ع</span>
+          </div>
+          <div class="summary-line">
+            <span>سعر التوصيل:</span>
+            <span id="cart-shipping">3000 د.ع</span>
+          </div>
+          <div class="summary-line total-line">
+            <span>المجموع الكلي:</span>
+            <span id="cart-total">0 د.ع</span>
+          </div>
+          <button class="checkout-btn" id="checkout-btn">تأكيد الطلب</button>
+        </div>
+
+        <div
+          class="checkout-form-container"
+          id="checkout-form"
+          style="display: none"
+        >
+          <h3>معلومات التوصيل</h3>
+          <div class="input-group">
+            <label>الاسم الكامل</label>
+            <input
+              type="text"
+              id="checkout-name"
+              placeholder="أدخل اسمك الكامل"
+            />
+          </div>
+          <div class="input-group">
+            <label>العنوان والسكن</label>
+            <input
+              type="text"
+              id="checkout-address"
+              placeholder="المحافظة - المنطقة - أقرب نقطة دالة"
+            />
+          </div>
+          <div class="input-group">
+            <label>رقم الهاتف</label>
+            <input
+              type="tel"
+              id="checkout-phone"
+              placeholder="أدخل رقم الهاتف"
+            />
+          </div>
+          <button class="submit-order-btn" id="submit-order-btn">
+            حفظ وإرسال الطلب
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="success-modal">
+      <div class="success-modal-content">
+        <div class="success-icon-wrapper">
+          <svg
+            width="64"
+            height="64"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#10b981"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        <h2>شكراً لك!</h2>
+        <p>تم استلام طلبك بنجاح. سيقوم فريقنا بمراجعته.</p>
+        <button class="success-btn" id="close-success-btn">حسناً، فهمت</button>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="address-modal" style="display: none">
+      <div
+        class="success-modal-content"
+        style="
+          text-align: right;
+          background: var(--bg-color);
+          max-width: 400px;
+          padding: 1.5rem;
+          border-radius: 12px;
+          width: 90%;
+        "
+      >
+        <h3
+          style="
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--text-main);
+          "
+        >
+          العناوين المحفوظة
+        </h3>
+        <form
+          id="address-form"
+          style="display: flex; flex-direction: column; gap: 1rem"
+        >
+          <div class="input-group">
+            <label style="display: block; margin-bottom: 0.5rem"
+              >الاسم الكامل</label
+            >
+            <input
+              type="text"
+              id="profile-name"
+              required
+              style="
+                width: 100%;
+                padding: 0.75rem;
+                border: 1px solid var(--border);
+                border-radius: 8px;
+              "
+            />
+          </div>
+          <div class="input-group">
+            <label style="display: block; margin-bottom: 0.5rem"
+              >رقم الهاتف</label
+            >
+            <input
+              type="tel"
+              id="profile-phone"
+              required
+              style="
+                width: 100%;
+                padding: 0.75rem;
+                border: 1px solid var(--border);
+                border-radius: 8px;
+              "
+            />
+          </div>
+          <div class="input-group">
+            <label style="display: block; margin-bottom: 0.5rem"
+              >العنوان التفصيلي</label
+            >
+            <input
+              type="text"
+              id="profile-address"
+              required
+              style="
+                width: 100%;
+                padding: 0.75rem;
+                border: 1px solid var(--border);
+                border-radius: 8px;
+              "
+            />
+          </div>
+          <div style="display: flex; gap: 1rem; margin-top: 1rem">
+            <button type="submit" class="checkout-btn" style="flex: 1">
+              حفظ العنوان
+            </button>
+            <button
+              type="button"
+              id="close-address-modal"
+              style="
+                flex: 1;
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                background: transparent;
+                color: var(--text-main);
+                font-weight: bold;
+                cursor: pointer;
+                font-family: inherit;
+              "
+            >
+              إلغاء
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="settings-modal" style="display: none">
+      <div
+        class="success-modal-content"
+        style="
+          text-align: right;
+          background: var(--bg-color);
+          max-width: 400px;
+          padding: 1.5rem;
+          border-radius: 12px;
+          width: 90%;
+        "
+      >
+        <h3
+          style="
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--text-main);
+          "
+        >
+          الإعدادات
+        </h3>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+          "
+        >
+          <span style="font-weight: 500; color: var(--text-main)"
+            >الوضع الليلي</span
+          >
+          <button
+            id="theme-toggle-btn"
+            style="
+              padding: 0.5rem 1rem;
+              border-radius: 8px;
+              background: var(--primary);
+              color: white;
+              border: none;
+              font-weight: bold;
+              cursor: pointer;
+              font-family: inherit;
+            "
+          >
+            تفعيل
+          </button>
+        </div>
+        <button
+          type="button"
+          id="close-settings-modal"
+          style="
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text-main);
+            font-weight: bold;
+            cursor: pointer;
+            font-family: inherit;
+          "
+        >
+          إغلاق
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="modal-overlay"
+      id="install-modal"
+      style="display: none; z-index: 9999"
+    >
+      <div
+        class="success-modal-content"
+        style="
+          text-align: right;
+          background: var(--bg-color);
+          max-width: 400px;
+          padding: 1.5rem;
+          border-radius: 12px;
+          width: 90%;
+        "
+      >
+        <div style="text-align: center; margin-bottom: 1rem">
+          <h3 style="color: var(--text-main); margin-bottom: 0.5rem">
+            حمل التطبيق
+          </h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem">
+            للحصول على تجربة أسرع وأفضل، قم بتثبيت التطبيق على جهازك.
+          </p>
+        </div>
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem">
+          <button
+            type="button"
+            id="btn-install-app"
+            style="
+              flex: 2;
+              padding: 0.75rem;
+              border-radius: 8px;
+              background: var(--primary);
+              color: white;
+              border: none;
+              font-weight: bold;
+              cursor: pointer;
+              font-family: inherit;
+            "
+          >
+            تثبيت
+          </button>
+          <button
+            type="button"
+            id="btn-skip-install"
+            style="
+              flex: 1;
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              background: transparent;
+              color: var(--text-main);
+              font-weight: bold;
+              cursor: pointer;
+              font-family: inherit;
+            "
+          >
+            تخطي
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="firebase-init.js"></script>
+    <script src="script.js?v=3"></script>
+  </body>
+</html>
